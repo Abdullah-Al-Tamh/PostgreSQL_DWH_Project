@@ -2,7 +2,7 @@
 \echo '        BRONZE DATA LOAD - STARTING (LOCAL ETL RUN)'
 \echo '============================================================'
 \echo ''
-\echo 'Target Database: :DBNAME'
+\echo 'Target Database: :datawarehouse'
 \echo 'Started at:      ' `date`
 \echo ''
 
