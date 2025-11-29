@@ -1,0 +1,8 @@
+# macOS system file
+.DS_Store
+
+# JetBrains / IntelliJ / PyCharm / DataGrip IDE files
+.idea/
+
+# Ignore RTF version of gitignore
+.gitignore.rtf
