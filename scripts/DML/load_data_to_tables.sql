@@ -1,3 +1,5 @@
+\set etl_start `date +"%Y-%m-%d %H:%M:%S"`
+
 \echo '============================================================'
 \echo '        BRONZE DATA LOAD - STARTING (LOCAL ETL RUN)'
 \echo '============================================================'
@@ -14,43 +16,46 @@
 \echo ''
 
 -- CRM Source Data
-
-\echo '[CRM] Loading crm_cust_info...'
+\set start_time `date +"%Y-%m-%d %H:%M:%S"`
+\echo '[CRM] Loading crm_cust_info... (start: :start_time)'
 \echo ' - Truncating bronze.crm_cust_info'
 TRUNCATE TABLE bronze.crm_cust_info;
 \echo ' - Copying from datasets/source_crm/cust_info.csv'
 COPY bronze.crm_cust_info
 FROM 'datasets/source_crm/cust_info.csv'
       CSV HEADER;
-\echo '[CRM] crm_cust_info - DONE'
+\set end_time `date +"%Y-%m-%d %H:%M:%S"`
+\echo '[CRM] crm_cust_info - DONE (end: :end_time)'
 \echo ''
 
 
-
-\echo '[CRM] Loading crm_prd_info...'
+\set start_time `date +"%Y-%m-%d %H:%M:%S"`
+\echo '[CRM] Loading crm_prd_info... (start: :start_time)'
 \echo ' - Truncating bronze.crm_prd_info'
 TRUNCATE TABLE bronze.crm_prd_info;
 \echo ' - Copying from datasets/source_crm/prd_info.csv'
 COPY bronze.crm_prd_info
 FROM 'datasets/source_crm/prd_info.csv'
       CSV HEADER;
-\echo '[CRM] crm_prd_info - DONE'
+\set end_time `date +"%Y-%m-%d %H:%M:%S"`
+\echo '[CRM] crm_prd_info - DONE (end: :end_time)'
 \echo ''
 
 
-\echo '[CRM] Loading crm_sales_details...'
+\set start_time `date +"%Y-%m-%d %H:%M:%S"`
+\echo '[CRM] Loading crm_sales_details... (start: :start_time)'
 \echo ' - Truncating bronze.crm_sales_details'
 TRUNCATE TABLE bronze.crm_sales_details;
 \echo ' - Copying from datasets/source_crm/sales_details.csv'
 COPY bronze.crm_sales_details
 FROM 'datasets/source_crm/sales_details.csv'
       CSV HEADER;
-\echo '[CRM] crm_sales_details - DONE'
+\set end_time `date +"%Y-%m-%d %H:%M:%S"`
+\echo '[CRM] crm_sales_details - DONE (end: :end_time)'
 \echo ''
 
 
 -- ERP Source Data
-
 
 \echo '------------------------------------------------------------'
 \echo 'Loading ERP SOURCE DATA into bronze...'
@@ -58,37 +63,42 @@ FROM 'datasets/source_crm/sales_details.csv'
 \echo ''
 
 
-\echo '[ERP] Loading erp_cust_az12...'
+\set start_time `date +"%Y-%m-%d %H:%M:%S"`
+\echo '[ERP] Loading erp_cust_az12... (start: :start_time)'
 TRUNCATE TABLE bronze.erp_cust_az12;
 COPY bronze.erp_cust_az12
 FROM 'datasets/source_erp/cust_az12.csv'
       CSV HEADER;
-\echo '[ERP] erp_cust_az12 - DONE'
+\set end_time `date +"%Y-%m-%d %H:%M:%S"`
+\echo '[ERP] erp_cust_az12 - DONE (end: :end_time)'
 \echo ''
 
 
-
-\echo '[ERP] Loading erp_loc_a101...'
+\set start_time `date +"%Y-%m-%d %H:%M:%S"`
+\echo '[ERP] Loading erp_loc_a101... (start: :start_time)'
 TRUNCATE TABLE bronze.erp_loc_a101;
 COPY bronze.erp_loc_a101
 FROM 'datasets/source_erp/loc_a101.csv'
       CSV HEADER;
-\echo '[ERP] erp_loc_a101 - DONE'
+\set end_time `date +"%Y-%m-%d %H:%M:%S"`
+\echo '[ERP] erp_loc_a101 - DONE (end: :end_time)'
 \echo ''
 
 
-
-\echo '[ERP] Loading erp_px_cat_g1v2...'
+\set start_time `date +"%Y-%m-%d %H:%M:%S"`
+\echo '[ERP] Loading erp_px_cat_g1v2... (start: :start_time)'
 TRUNCATE TABLE bronze.erp_px_cat_g1v2;
 COPY bronze.erp_px_cat_g1v2
 FROM 'datasets/source_erp/px_cat_g1v2.csv'
       CSV HEADER;
-\echo '[ERP] erp_px_cat_g1v2 - DONE'
+\set end_time `date +"%Y-%m-%d %H:%M:%S"`
+\echo '[ERP] erp_px_cat_g1v2 - DONE (end: :end_time)'
 \echo ''
 
 
-\echo ''
+\set etl_end `date +"%Y-%m-%d %H:%M:%S"`
 \echo '============================================================'
 \echo ' BRONZE DATA LOAD - COMPLETED SUCCESSFULLY'
-\echo ' Finished at: ' `date`
+\echo ' Start Time: :etl_start'
+\echo ' End Time:   :etl_end'
 \echo '============================================================'
