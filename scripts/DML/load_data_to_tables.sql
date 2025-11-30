@@ -97,8 +97,15 @@ FROM 'datasets/source_erp/px_cat_g1v2.csv'
 
 
 \set etl_end `date +"%Y-%m-%d %H:%M:%S"`
+
+\set etl_start_epoch `date -j -f "%Y-%m-%d %H:%M:%S" ":etl_start" "+%s"`
+\set etl_end_epoch   `date -j -f "%Y-%m-%d %H:%M:%S" ":etl_end" "+%s"`
+
+\set etl_duration `echo $(:etl_end_epoch - :etl_start_epoch | bc)`
+
 \echo '============================================================'
 \echo ' BRONZE DATA LOAD - COMPLETED SUCCESSFULLY'
 \echo ' Start Time: :etl_start'
 \echo ' End Time:   :etl_end'
+\echo ' Total Duration: :etl_duration seconds'
 \echo '============================================================'
